@@ -14,7 +14,7 @@ class InvalidToken implements ISingleSignOnRequest {
     }
 
     public function send($data = null) {
-        $result = $this->soapClient->__soapCall("invalidToken1", array(array('TokenId' => $data["token"])));
+        $result = $this->soapClient->__soapCall("invalidToken1", array(array('TokenId' => $data["token1"])));
     }
 
     public function getErrorMsg() {}
