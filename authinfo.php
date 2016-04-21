@@ -36,6 +36,9 @@ class AuthInfo implements IAuthInfo
             if($request->offsetGet($key)) {
                 self::$info[$key] = $request->offsetGet($key);
             }
+            else if($request->getHeader($key)) {
+                self::$info[$key] = $request->getHeader($key);
+            }
             else if($session->get("sso_" . $key)) {
                 self::$info[$key] = $session->get("sso_" . $key);
             }
