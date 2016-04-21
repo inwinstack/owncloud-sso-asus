@@ -16,9 +16,17 @@ class APIServerConnection implements IAPIServerConnection {
     private $connection;
     
     /**
-     * @param mixed 
+     * Server url
+     *
+     * @var string
+     */
+    private $serverUrl;
+
+    /**
+     * @param string
      */
     public function __construct($serverUrl) {
+        $this->serverUrl = $serverUrl;
         $this->connection = new \SoapClient($serverUrl);
     }
     
@@ -29,6 +37,16 @@ class APIServerConnection implements IAPIServerConnection {
      */
     public function getConnection() {
         return $this->connection;
+    }
+    
+    /**
+     * Get API server url
+     *
+     * @return string
+     */
+    public function getServerUrl()
+    {
+        return $this->serverUrl;
     }
     
 }   
