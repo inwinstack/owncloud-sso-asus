@@ -13,7 +13,6 @@ class AuthInfo implements IAuthInfo
      *
      * @var array
      */
-    //private static $requireKeys = array("key","userid");
     private static $requireKeys = array("token1");
 
     /**
