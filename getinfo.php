@@ -8,6 +8,7 @@ class GetInfo implements IUserInfoRequest {
     private $groups = array();
     private $userGroup;
     private $displayName;
+    private $token;
     private $errorMsg;
 
     public function __construct($soapClient){
@@ -33,6 +34,7 @@ class GetInfo implements IUserInfoRequest {
         $this->displayName = $info->CName;
         $this->userSid = $info->UserSid;
         $this->userGroup = $info->UserGroup;
+        $this->token = $data["token1"];
 
         return true;
     }
@@ -57,6 +59,16 @@ class GetInfo implements IUserInfoRequest {
         return $this->displayName;
     }
 
+    /**
+     * Get user auth token
+     *
+     * @return string $token
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+    
 
     /**
      * Getter for userSid
