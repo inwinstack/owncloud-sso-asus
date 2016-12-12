@@ -3,6 +3,7 @@ namespace OCA\SingleSignOn;
 
 class GetInfo implements IUserInfoRequest {
     private $soapClient;
+    private $setupParams = array();
     private $userId;
     private $email;
     private $groups = array();
@@ -14,6 +15,15 @@ class GetInfo implements IUserInfoRequest {
     public function __construct($soapClient){
         $this->soapClient = $soapClient;
     }
+
+
+    public function setup($params)
+    {
+        foreach ($params as $key => $value) {
+            $this->setupParams[$key] = $value;
+        }
+    }
+
 
     public function name() {
         return ISingleSignOnRequest::INFO;
@@ -85,10 +95,20 @@ class GetInfo implements IUserInfoRequest {
      * @return bool
      */
     public function hasPermission(){
-        if ($this->userGroup == "T" || $this->userGroup == "S") {
+        if (in_array("T", $this->userGroup) || in_array("S", $this->userGroup)){
             return true;
         }
 
         return false;
+    }
+    
+    /**
+     * Check has error massage or not
+     *
+     * @return true|false
+     */
+    public function hasErrorMsg()
+    {
+        return $this->errorMsg ? true : false;
     }
 }
