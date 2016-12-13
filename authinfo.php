@@ -23,11 +23,11 @@ class AuthInfo implements IAuthInfo
     private static $info = array();
 
     /**
-     * set auth info
+     * Getter for Info
      *
-     * @return void
+     * @return array
      */
-    public static function init()
+    public static function get()
     {
         $request = \OC::$server->getRequest();
         $session = \OC::$server->getSession();
@@ -42,21 +42,14 @@ class AuthInfo implements IAuthInfo
                 self::$info[$key] = $session->get("sso_" . $key);
             }
         }
-        self::$info["userIp"] = $request->getRemoteAddress();
-    }
 
-    /**
-     * Getter for Info
-     *
-     * @return array
-     */
-    public static function get()
-    {
+        self::$info["userIp"] = $request->getRemoteAddress();
         foreach (self::$requireKeys as $key) {
             if(!array_key_exists($key, self::$info)) {
                 return null;
             }
         }
+
         return self::$info;
     }
     
